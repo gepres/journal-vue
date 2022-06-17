@@ -1,20 +1,47 @@
 <template>
-  <div @click="$router.push({name: 'entry', params:{id: 10}})" class="entry-container pointer p-2">
+  <div @click="$router.push({name: 'entry', params:{id: entry.id}})" class="entry-container pointer p-2">
 
     <div class="entry-title d-flex">
-      <span class="text-success fs-5 fw-bold">15</span>
-      <span class="mx-1 fs-5">Julio</span>
-      <span class="mx-2 fw-light">2022, jueves</span>
+      <span class="text-success fs-5 fw-bold">{{day}}</span>
+      <span class="mx-1 fs-5">{{month}}</span>
+      <span class="mx-2 fw-light">{{yearDay}}</span>
     </div>
     <div class="entry-description">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi repudiandae magni ratione obcaecati tempora odio est eaque debitis ad reprehenderit.
+      {{shortText}}
     </div>
   </div>
 </template>
 
 <script>
+import getDayMothYear from '../helpers/getDayMothYear'
+
 export default {
-  name:'EntryComponent'
+  name:'EntryComponent',
+  props: {
+    entry: {
+      type: Object,
+      required: true,
+      default: () => {}
+    }
+  },
+  computed:{
+    shortText() {
+      return (this.entry.text.length > 130)
+        ? this.entry.text.substring(0, 130) + '...' :  this.entry.text
+    },
+    day(){
+      const {day} = getDayMothYear(this.entry.date)
+      return day
+    },
+    month(){
+      const {month} = getDayMothYear(this.entry.date)
+      return month
+    },
+    yearDay() {
+      const {yearDay} = getDayMothYear(this.entry.date)
+      return yearDay
+    }
+  }
 }
 </script>
 

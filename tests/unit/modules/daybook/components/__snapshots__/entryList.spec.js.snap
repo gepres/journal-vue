@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en el EntryList debe de llamar el getEntriesByTerm sin termino y mostrar 2 entradas 1`] = `[Function]`;
